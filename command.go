@@ -250,6 +250,7 @@ func NewPayload(request *CommandRequest) (*Payload, error) {
 	case "ScheduleOSUpdateScan":
 		payload.Command.ScheduleOSUpdateScan = request.ScheduleOSUpdateScan
 	case "ProfileList",
+		"RemoveProfile",
 		"ProvisioningProfileList",
 		"CertificateList",
 		"SecurityInfo",
@@ -275,6 +276,8 @@ func NewPayload(request *CommandRequest) (*Payload, error) {
 		payload.Command.InstalledApplicationList = request.InstalledApplicationList
 	case "EraseDevice":
 		payload.Command.EraseDevice = request.EraseDevice
+	case "DeviceLock":
+		payload.Command.DeviceLock = request.DeviceLock
 	default:
 		return nil, fmt.Errorf("Unsupported MDM RequestType %v", requestType)
 	}
