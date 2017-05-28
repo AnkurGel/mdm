@@ -42,11 +42,13 @@ type Command struct {
 	DeviceInformation
 	InstallApplication
 	InstallProfile
+	RemoveProfile
 	InstalledApplicationList
 	AccountConfiguration
 	ScheduleOSUpdateScan
 	ScheduleOSUpdate
 	EraseDevice
+	DeviceLock
 }
 
 // The following commands are in the order provided by the apple documentation.
@@ -250,7 +252,6 @@ func NewPayload(request *CommandRequest) (*Payload, error) {
 	case "ScheduleOSUpdateScan":
 		payload.Command.ScheduleOSUpdateScan = request.ScheduleOSUpdateScan
 	case "ProfileList",
-		"RemoveProfile",
 		"ProvisioningProfileList",
 		"CertificateList",
 		"SecurityInfo",
@@ -278,6 +279,8 @@ func NewPayload(request *CommandRequest) (*Payload, error) {
 		payload.Command.EraseDevice = request.EraseDevice
 	case "DeviceLock":
 		payload.Command.DeviceLock = request.DeviceLock
+	case "RemoveProfile":
+		payload.Command.RemoveProfile = request.RemoveProfile
 	default:
 		return nil, fmt.Errorf("Unsupported MDM RequestType %v", requestType)
 	}
